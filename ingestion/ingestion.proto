@@ -1,0 +1,21 @@
+syntax = "proto3";
+option go_package = "jobschedulerserver/pkg/ingestion";
+
+import "google/protobuf/timestamp.proto";
+import "jobschedulerserver/pkg/jobs/jobs.proto";
+//  protoc pkg/ingestion/ingestion.proto --go_out . --go-grpc_out .
+
+service SchedulerAPI {
+  rpc SendJob(SendJobRequest) returns (SendJobResponse) {}
+}
+
+message SendJobRequest {
+  Job job = 1;
+  google.protobuf.Timestamp timestamp = 15;
+}
+
+message SendJobResponse {
+
+  google.protobuf.Timestamp timestamp = 15;
+}
+
