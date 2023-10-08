@@ -1,10 +1,10 @@
 syntax = "proto3";
-option go_package = "/pkg/jobs";
+option go_package = "./protos";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/any.proto";
 
-// protoc pkg/jobs/jobs.proto --go_out . --go-grpc_out .
+// protoc protos/jobs.proto --go_out . --go-grpc_out .
 
 message Job {
   string type = 1;

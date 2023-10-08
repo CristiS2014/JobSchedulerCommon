@@ -1,9 +1,9 @@
 syntax = "proto3";
-option go_package = "jobschedulerserver/pkg/ingestion";
+option go_package = "./protos";
 
 import "google/protobuf/timestamp.proto";
-import "jobschedulerserver/pkg/jobs/jobs.proto";
-//  protoc pkg/ingestion/ingestion.proto --go_out . --go-grpc_out .
+import "protos/jobs.proto";
+//  protoc protos/ingestion.proto --go_out . --go-grpc_out .
 
 service SchedulerAPI {
   rpc SendJob(SendJobRequest) returns (SendJobResponse) {}
