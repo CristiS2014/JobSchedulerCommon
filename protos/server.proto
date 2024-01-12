@@ -1,0 +1,21 @@
+syntax = "proto3";
+option go_package = "./protos";
+
+import "google/protobuf/timestamp.proto";
+import "protos/jobs.proto";
+//  protoc protos/server.proto --go_out . --go-grpc_out .
+
+service ServerAPI {
+  rpc SendJob(GetJobRequest) returns (GetJobResponse) {}
+}
+
+message GetJobRequest {
+  string type = 1;
+  google.protobuf.Timestamp timestamp = 15;
+}
+
+message GetJobResponse {
+  Job job = 1;
+  google.protobuf.Timestamp timestamp = 15;
+}
+
