@@ -2,13 +2,13 @@ syntax = "proto3";
 option go_package = "./protos";
 
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/any.proto";
+//import "google/protobuf/any.proto";
 
 // protoc protos/jobs.proto --go_out . --go-grpc_out .
 
 message Job {
   string type = 1;
-  google.protobuf.Any parameters = 2;
+  bytes parameters = 2;
   google.protobuf.Timestamp timestamp = 15;
 }
 
