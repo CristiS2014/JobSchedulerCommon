@@ -6,7 +6,7 @@ import "protos/jobs.proto";
 //  protoc protos/server.proto --go_out . --go-grpc_out .
 
 service ServerAPI {
-  rpc SendJob(GetJobRequest) returns (GetJobResponse) {}
+  rpc GetJob(GetJobRequest) returns (GetJobResponse) {}
 }
 
 message GetJobRequest {

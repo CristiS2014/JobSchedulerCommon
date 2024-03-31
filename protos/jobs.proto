@@ -9,10 +9,14 @@ import "google/protobuf/timestamp.proto";
 message Job {
   string type = 1;
   bytes parameters = 2;
+  string id = 3;
   google.protobuf.Timestamp timestamp = 15;
 }
 
 message JobUpdate {
-
+  string id = 1;
+  string type = 2;
+  string result = 3;
+  string metaData = 4;
   google.protobuf.Timestamp timestamp = 15;
 }

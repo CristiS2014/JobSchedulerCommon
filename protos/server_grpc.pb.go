@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ServerAPIClient interface {
-	SendJob(ctx context.Context, in *GetJobRequest, opts ...grpc.CallOption) (*GetJobResponse, error)
+	GetJob(ctx context.Context, in *GetJobRequest, opts ...grpc.CallOption) (*GetJobResponse, error)
 }
 
 type serverAPIClient struct {
@@ -33,9 +33,9 @@ func NewServerAPIClient(cc grpc.ClientConnInterface) ServerAPIClient {
 	return &serverAPIClient{cc}
 }
 
-func (c *serverAPIClient) SendJob(ctx context.Context, in *GetJobRequest, opts ...grpc.CallOption) (*GetJobResponse, error) {
+func (c *serverAPIClient) GetJob(ctx context.Context, in *GetJobRequest, opts ...grpc.CallOption) (*GetJobResponse, error) {
 	out := new(GetJobResponse)
-	err := c.cc.Invoke(ctx, "/ServerAPI/SendJob", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ServerAPI/GetJob", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ func (c *serverAPIClient) SendJob(ctx context.Context, in *GetJobRequest, opts .
 // All implementations must embed UnimplementedServerAPIServer
 // for forward compatibility
 type ServerAPIServer interface {
-	SendJob(context.Context, *GetJobRequest) (*GetJobResponse, error)
+	GetJob(context.Context, *GetJobRequest) (*GetJobResponse, error)
 	mustEmbedUnimplementedServerAPIServer()
 }
 
@@ -54,8 +54,8 @@ type ServerAPIServer interface {
 type UnimplementedServerAPIServer struct {
 }
 
-func (UnimplementedServerAPIServer) SendJob(context.Context, *GetJobRequest) (*GetJobResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SendJob not implemented")
+func (UnimplementedServerAPIServer) GetJob(context.Context, *GetJobRequest) (*GetJobResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetJob not implemented")
 }
 func (UnimplementedServerAPIServer) mustEmbedUnimplementedServerAPIServer() {}
 
@@ -70,20 +70,20 @@ func RegisterServerAPIServer(s grpc.ServiceRegistrar, srv ServerAPIServer) {
 	s.RegisterService(&ServerAPI_ServiceDesc, srv)
 }
 
-func _ServerAPI_SendJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ServerAPI_GetJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetJobRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServerAPIServer).SendJob(ctx, in)
+		return srv.(ServerAPIServer).GetJob(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ServerAPI/SendJob",
+		FullMethod: "/ServerAPI/GetJob",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServerAPIServer).SendJob(ctx, req.(*GetJobRequest))
+		return srv.(ServerAPIServer).GetJob(ctx, req.(*GetJobRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -96,8 +96,8 @@ var ServerAPI_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ServerAPIServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SendJob",
-			Handler:    _ServerAPI_SendJob_Handler,
+			MethodName: "GetJob",
+			Handler:    _ServerAPI_GetJob_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
