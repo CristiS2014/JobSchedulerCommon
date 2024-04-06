@@ -2,7 +2,7 @@ syntax = "proto3";
 option go_package = "./protos";
 
 import "google/protobuf/timestamp.proto";
-//import "google/protobuf/any.proto";
+import "google/protobuf/any.proto";
 
 // protoc protos/jobs.proto --go_out . --go-grpc_out .
 
@@ -16,7 +16,9 @@ message Job {
 message JobUpdate {
   string id = 1;
   string type = 2;
-  string result = 3;
-  string metaData = 4;
+  google.protobuf.Any result = 3;
+  google.protobuf.Any metaData = 4;
+  google.protobuf.Any error = 5;
+
   google.protobuf.Timestamp timestamp = 15;
 }
