@@ -8,11 +8,17 @@ import "google/protobuf/any.proto";
 
 message Job {
   string type = 1;
-  google.protobuf.Any parameters = 2;
+  bytes parameters = 2;
+  string id = 3;
   google.protobuf.Timestamp timestamp = 15;
 }
 
 message JobUpdate {
+  string id = 1;
+  string type = 2;
+  google.protobuf.Any result = 3;
+  google.protobuf.Any metaData = 4;
+  google.protobuf.Any error = 5;
 
   google.protobuf.Timestamp timestamp = 15;
 }
