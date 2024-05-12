@@ -15,6 +15,7 @@ message SendJobRequest {
 }
 
 message SendJobResponse {
+  string Id = 1;
 
   google.protobuf.Timestamp timestamp = 15;
 }
